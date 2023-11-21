@@ -5,6 +5,25 @@
 #     age = 15
 
 ''' Створення об'єктів '''
+
+# class User:
+#     name = None             # атребути (поля, властивості, методи)
+#     age = None               
+#     phone = None 
+    
+#     def greeting(self):
+#         return f'I am {self.name} my self {self}'
+            
+# user_1 = User()            # створюємо екземпляр класу User
+# user_1.name = 'Taras'      # передаємо атрибуту name екземпляра user_1 значення Taras 
+# user_1.age = 42            # передаємо атрибуту name екземпляра user_1 значення 42
+# user_1.phone = 53521       # передаємо атрибуту name екземпляра user_1 значення 35321
+
+# print(user_1.name, user_1.age, user_1.phone)   # Taras 42 53521 
+# print(user_1.greeting())   # I am Taras my self <__main__.User object at 0x00000220C51D2C50>
+# print(user_1)                                 # <__main__.User object at 0x00000220C51D2C50>
+
+#####
 # class User:
 #     name = 'UserName'     # атребути (поля, властивості, методи)
 #     age = 15              # атребути (поля, властивості, методи)
@@ -19,6 +38,7 @@
 
 # print(user2.name)   # 'Jhon'
 # print(user2.age)    # '90'
+
 
 ''' Атрибути класу (поля та методи) '''
 # class User:
@@ -77,6 +97,40 @@
 
 ''' Наслідування '''
 '''Основна сила об'єктно-орієнтованого програмування полягає саме в можливості наслідування класів. Наслідування дає можливість створювати нові класи, що містять атрибути батьківських класів.'''
+# class Person():
+#     name = None
+    
+#     def greeting(self):
+#         print(f'I am {self.name}')
+        
+# class Developer(Person):              # наслідується від Person (отримує атрибути)
+#     def do_job(self):
+#         print(f'I am writting code now...')
+
+# class Manager(Person):
+#     def manage(self):
+#         print('Deadline is coming, hurry up!')
+        
+# class TeamLead(Developer, Manager):
+#     def manage(self):                
+#         print('I am tem lead')
+#         return super().manage()       # доповнює функцію def manage класу Manager
+    
+               
+# team_lead = TeamLead()
+# team_lead.name = 'Bob'
+# team_lead.greeting()            # I am Bob
+# team_lead.do_job()              # I am writting code now...    
+# team_lead.manage()              # Deadline is coming, hurry up!
+
+# junior = Developer()
+# junior.name = 'Taras'
+
+# junior.greeting()           # I am Taras
+# junior.do_job()             # I am writting code now...
+
+
+#####
 # class Human:
 #     name = ''
 #     def voice(self):
@@ -152,6 +206,23 @@
 # print(c.x)  # I am B class
 
 ### Тепер у класі C поле x береться з B класу.
+
+#####
+# class Foo:
+#     field = "foo"
+    
+
+# class Baz:
+#     field = "baz"
+    
+
+# class Bar(Baz, Foo):
+#     pass
+
+
+# bar = Bar()
+
+# print(bar.field)  # baz
 
 ''' Контейнери, створені за допомогою наслідування (UserList, UserDict, UserString). '''
 '''Правильний спосіб отримати модифікований контейнер — це використовувати пакет collections та класи UserList, UserDict, UserString, які в ньому є.
@@ -269,6 +340,7 @@
 # r.record_animal(strange_animal) # Recorded "Whooooo!!!"
 
 ### В цьому прикладі ми створили батьківський клас Mammal, у якого є метод voice та два дочірніх до нього Dog та Cat. Клас Record приймає на вхід методу record_animal об'єкт animalта викликає в нього метод voice, щоб вивести результати виконання voice у консоль. При цьому є клас Chupakabra, у якого також є метод voice, та хоч він і не наслідується від Mammal, але об'єкти цього класу так само можна передавати в record_animal. Головне, щоб атрибут називався так само і приймав ті самі аргументи (якщо це метод).
+
 
 #################
 '''Урок Борода'''
@@ -460,3 +532,31 @@
 #         print('Baaam')     # качина типізація - образно, якщо об'єкт має метод kick_ass то це зброя (клас Weapon) якщо ні
 #         return self.damage
 
+''' Функця super 
+надає можливість посилатись на батьківський клас '''
+
+# class A():
+#     def __init__(self) -> None:
+#         print('Hello, I am A')
+        
+# class B(A):
+#     def __init__(self) -> None:
+#         super().__init__()   # в дужках після функції super можна вкзати який батьківський клас ми викликаємо
+#         print('Hello I am B')
+        
+# b = B()   # Hello, I am A; Hello I am B
+
+#####
+
+# class Motherboard:
+#     def __init__(self, brand: str) -> None:
+#         self.brand = brand
+
+
+# class Laptop(Motherboard):
+#     def __init__(self, brand: str, ram_size: int) -> None:
+#         super().__init__(brand)
+#         self.ram = ram_size
+
+
+# lp = Laptop("Dell", 32)

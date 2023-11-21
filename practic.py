@@ -15,6 +15,65 @@
 # animal.age = 5
 # print(animal.get_info())
 
+#####
+## файл ex03.py ###
+
+# data = {"name": "Bill", 
+#         "games": [
+#             {"name": "Doom", "counter": 10},
+#             {"name": "WoW", "counter": 15},
+#             {"name": "HeroesIII", "counter": 20}]}
+
+
+# class Game:
+#     def __init__(self, name: str) -> None:
+#         self.name = name
+#         self.count = 0
+    
+#     def play_game(self):
+#         self.count += 1
+    
+#     def __repr__(self) -> str:
+#         return f"{self.name = }, {self.count = }"
+
+
+# class Gamer:
+#     def __init__(self, name: str) -> None:
+#         self.name = name
+#         self.games = []
+    
+#     def add_game(self, game: Game) -> None:
+#         self.games.append(game)
+    
+#     def play_game(self, game_name: str) -> str:
+#         for g in self.games:
+#             if g.name == game_name:
+#                 g.play_game()
+#                 return "Good game"
+#         return "Bad game"
+    
+## файл ex04.py ###
+
+# if __name__ == '__main__':
+#     print(data["games"][0]["counter"])
+
+# from ex03 import Game, Gamer
+
+
+# g1 = Game("Doom")
+# g2 = Game("CS:Go")
+# g3 = Game("HeroesIII")
+
+# gamer = Gamer("Bill")
+
+# for g in (g1, g2, g3):
+#     gamer.add_game(g)
+
+# print(gamer.games)
+# print(gamer.play_game("Doom"))
+# print(gamer.games)
+
+    
 """
 Базові принципи ООП - Спадкування
 Спадкування є властивістю об'єктів породжувати своїх нащадків.
@@ -76,6 +135,51 @@
 # print(p2.brand)
 
 # print(dir(cat))
+
+#####
+
+# from random import randint, choice
+
+
+# class Position:
+#     def __init__(self, value) -> None:
+#         self.value = value
+    
+#     def get_salary(self):
+#         return randint(500, 1500)
+
+#     def __str__(self) -> str:
+#         return self.value
+
+
+# class Employee:
+#     def __init__(self, name: str, position: str = None) -> None:
+#         self.name = name
+#         self.position = Position(position) if position else position
+
+#     def get_rate(self) -> int:
+#         if self.position:
+#             return self.position.get_salary()
+#         return 0
+
+
+
+# names = ("Bill", "Gill", "Mary")
+
+# positions = ("Manager", "CEO", "Developer", "QA")
+
+# employees = []
+
+# for i in range(1000):
+#     employees.append(Employee(f"{choice(names)}-{i}", choice((choice(positions), None))))
+
+# print(len(employees))
+
+# rand_emp: Employee = employees[randint(0, 999)]
+
+# print(rand_emp.get_rate(), rand_emp.position, rand_emp.name )
+
+# print(len(list(filter(lambda x: x.get_rate() != 0, employees))))
 
 """
 Базові принципи ООП - Поліморфізм
@@ -277,7 +381,7 @@ MRO в Python працює наступним чином:
 # dev.value = 'Python'
 # print(dev.make_some_code())
 
-''' Контейнери UserList '''
+''' Контейнери списки UserList '''
 
 # from collections import UserList
 # from random import randint
@@ -307,7 +411,7 @@ MRO в Python працює наступним чином:
 # print(result.get_negative())
 # print(result.get_info())
 
-'''Словник UserDict'''
+'''Контейнери словники UserDict'''
 # from collections import UserDict
 
 # contacts = [
@@ -357,7 +461,30 @@ MRO в Python працює наступним чином:
 #     print(customer.get_email())
 #     print(customer.get_phone())
 
-'''Строки UserString'''
+#####
+
+# from collections import UserDict
+
+
+# class Box(UserDict):
+#     def add_if_not_exist(self, key, item):
+#         if self.data.get(key):
+#             return None
+#         self.data[key] = item
+#         return item
+
+
+# box = Box()
+
+# box.add_if_not_exist("food", "banana")
+
+# print(box)
+
+# box.add_if_not_exist("food", "kiwi")
+
+# print(box)
+
+''' Контейнери строки UserString'''
 # from collections import UserString
 
 # template = [
@@ -382,3 +509,148 @@ MRO в Python працює наступним чином:
 # text = [Text(text) for text in template]
 # for item, text in enumerate(text):
 #     print("|{:^5}|{:<15}".format(item, text.set_limit_text(35)))
+
+''' Власні винятки '''
+# class MyException(Exception):
+#     def __init__(self, x):
+#         self.x = x
+
+
+# def foo(number):
+#     if number < 0:
+#         raise MyException(f'Value is equal {number} and lower then 0')
+#     else:
+#         return "Hello world!"
+
+# try:
+#     print(foo(-100))
+# except MyException as e:
+#     print(e)
+
+# print(foo(-34))
+
+#####
+
+# class LaptopNameError(Exception):...
+
+
+# class Laptop:
+#     def __init__(self, name: str) -> None:
+#         if len(name) < 2:
+#             raise LaptopNameError("Name must be grater then 1 symbols")
+#         self.name = name
+
+# try:
+#     lp1 = Laptop("H")
+# except LaptopNameError as e:
+#     print(e)
+
+#####
+# from collections import UserDict, UserList
+
+
+# class Phones(UserList):
+#     def set_phone(self, phone):
+#         if len(phone) == 12:
+#             new_phone = '+' + phone
+#         elif len(phone) < 12:
+#             new_phone = '+38' + phone
+#         self.data.append(new_phone)
+        
+#     def get_phones(self):
+#         return self.data
+   
+# отримуємо словник за номерами телефонів {'name: ім'я', 'phones': [phone, phone, phone]} 
+# class User(UserDict):
+#     def set_name(self, name):
+#         self.data['name'] = name
+        
+#     def get_name(self):
+#         return self.data.get('name')
+    
+#     def set_phone(self, phone):
+#         phone_list = self.data.get('phones', Phones())
+#         phone_list.data.append(phone)
+#         self.data['phones'] = phone_list
+        
+#     def get_phone(self):
+#         return self.data.get('phones')
+
+# user_1 = User()
+# user_1.set_name('Bill')
+# user_1.set_phone('0989008080')
+# user_1.set_phone('380938009090')
+# print(user_1.get_name(), user_1.get_phone())
+
+""" Качина типізація
+Неявна типізація, латентна типізація або качина типізація (англ. Duck typing) в ООП мовах - визначення факту реалізації певного інтерфейсу об'єктом без явної вказівки або наслідування цього інтерфейсу, а просто реалізації повного набору методів.
+"""
+
+# class Dog:
+#     def speak(self):
+#         return 'Woof'
+
+# class Cat:
+#     def speak(self):
+#         return 'Meow'
+
+# class Duck:
+#     def speak(self):
+#         return 'Quack'
+
+# def animal(animal):
+#     return animal.speak()
+
+# dog = Dog()
+# cat = Cat()
+# duck = Duck()
+
+# print(animal(dog))
+# print(animal(cat))
+# print(animal(duck))
+
+#####
+
+# class Duck:
+#     def swim_quack(self):
+#         print("I'm duck, and I can swim and quack")
+
+# class RobotDuck:
+#     def swim_quack(self):
+#         print("I'm robot duck, and I can swim and quack")
+
+# class Fish:
+#     def swim(self):
+#         print("I'm a fish, and I can swim but can't quack")
+
+
+# def animal(animal):
+#     return animal.swim_quack()
+
+# animal(Duck())
+# animal(RobotDuck())
+# animal(Fish())
+
+#####
+
+# class Laptop:
+#     def __init__(self) -> None:
+#         self.color = "Black"
+
+#     def get_color(self) -> str:
+#         return self.color
+
+
+# class Bird:
+#     def __init__(self) -> None:
+#         self.color = "Brown"
+        
+#     def get_color(self) -> str:
+#         return self.color
+
+
+# lp = Laptop()
+# bird = Bird()
+
+# for i in (lp, bird):
+#     print(i.get_color())
