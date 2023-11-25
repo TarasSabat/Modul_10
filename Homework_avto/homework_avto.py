@@ -94,30 +94,30 @@
 Створіть у коді наступний екземпляр класу Dog.
 dog = Dog("Barbos", 23, "labrador")
 '''
-class Animal:
-    def __init__(self, nickname, weight):
-        self.nickname = nickname
-        self.weight = weight
+# class Animal:
+#     def __init__(self, nickname, weight):
+#         self.nickname = nickname
+#         self.weight = weight
 
-    def say(self):
-        pass
+#     def say(self):
+#         pass
 
-    def change_weight(self, weight):
-        self.weight = weight
+#     def change_weight(self, weight):
+#         self.weight = weight
 
 
-class Dog(Animal):
-    def __init__(self, nickname, weight, breed):
-        super().__init__(nickname, weight)
-        self.breed = breed
-    def say(self):
-        return "Woof"
+# class Dog(Animal):
+#     def __init__(self, nickname, weight, breed):
+#         super().__init__(nickname, weight)
+#         self.breed = breed
+#     def say(self):
+#         return "Woof"
     
-dog = Dog("Barbos", 23, "labrador")
+# dog = Dog("Barbos", 23, "labrador")
 
-print(dog.say)
-print(dog.nickname)
-print(dog.weight)
+# print(dog.say)
+# print(dog.nickname)
+# print(dog.weight)
 
 '''№7
 Для минулого завдання додамо клас Owner — власника собаки. У класу є три атрибути: ім'я — name, вік — age та адреса — address. Також необхідно реалізувати метод info, який повертає словник з ключами 'name', 'age' і 'address', та значення яких дорівнюють відповідним властивостям екземпляра класу.
@@ -321,6 +321,79 @@ add_contacts додає новий контакт до списку, який є
 #         self.phone = phone
 #         self.email = email
 #         self.favorite = favorite
-#         self.contacts.append({"id": current_id,  })
+#         self.contacts.append({"id": Contacts.current_id, 'name': self.name, 'phone': self.phone, 'email': self.email, "favorite": self.favorite})
+#         Contacts.current_id += 1
         
 # contacts = Contacts()
+
+'''№15
+Продовжуємо розширювати функціональність класу Contacts. На цьому етапі ми додамо до класу метод get_contact_by_id. Метод повинен шукати контакт по унікальному id у списку contacts та повертати словник з нього із зазначеним ключем id. Якщо словника із зазначеним id у списку contacts не знайдено, метод повертає None.
+Примітка: для правильного проходження тесту не створюйте екземпляр класу в коді.
+'''
+# class Contacts:
+#     current_id = 1
+
+#     def __init__(self):
+#         self.contacts = []
+
+#     def list_contacts(self):
+#         return self.contacts
+
+#     def add_contacts(self, name, phone, email, favorite):
+#         self.contacts.append(
+#             {
+#                 "id": Contacts.current_id,
+#                 "name": name,
+#                 "phone": phone,
+#                 "email": email,
+#                 "favorite": favorite,
+#             }
+#         )
+#         Contacts.current_id += 1
+
+#     def get_contact_by_id(self, id):
+#         for i in range(len(self.contacts)):
+#             if id == self.contacts[i]['id']:
+#                 return self.contacts[i]
+            
+# con = Contacts()
+# con.add_contacts("Wylie Pope", "(692) 802-2949", "est@utquamvel.net", True)
+# print(con.get_contact_by_id(1))   
+
+'''№16     
+Завершуємо функціональність класу Contacts. На цьому етапі ми додамо до класу метод remove_contacts. Метод винен видаляти контакт по унікальному id у списку contacts. Якщо словника із зазначеним id у списку contacts не знайдено, метод жодних дій над списком contacts не робить.
+Примітка: для правильного проходження тесту не створюйте екземпляр класу в коді.
+'''
+# class Contacts:
+#     current_id = 1
+
+#     def __init__(self):
+#         self.contacts = []
+
+#     def list_contacts(self):
+#         return self.contacts
+
+#     def add_contacts(self, name, phone, email, favorite):
+#         self.contacts.append(
+#             {
+#                 "id": Contacts.current_id,
+#                 "name": name,
+#                 "phone": phone,
+#                 "email": email,
+#                 "favorite": favorite,
+#             }
+#         )
+#         Contacts.current_id += 1
+
+#     def get_contact_by_id(self, id):
+#         result = list(filter(lambda contact: contact.get("id") == id, self.contacts))
+#         return result[0] if len(result) > 0 else None
+
+#     def remove_contacts(self, id):
+#         result = list(filter(lambda contact: contact.get("id") == id, self.contacts))
+#         self.contacts.remove(result[0])
+#         return self.contacts
+    
+# con = Contacts()
+# con.add_contacts("Wylie Pope", "(692) 802-2949", "est@utquamvel.net", True)
+# con. remove_contacts(1)
