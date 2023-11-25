@@ -28,44 +28,20 @@ class Record:
            
     def remove_phone(self, phone_number):              
         self.phones = [phone for phone in self.phones if phone.value != phone_number]
-       
-    # def edit_phone(self, old_phone, new_phone):    # варіант чат-бота
-    #     self.remove_phone(old_phone)
-    #     self.add_phone(new_phone)
+    
     
     def edit_phone(self, old_phone, new_phone):
-        for i in self.phones:
-            a = i # print(self.phones[i])
-            b = int(old_phone) # print(old_phone)
-            if a==b: #self.phones[i] == old_phone:
-            
-                print(0)
-        
-        # for i in range(len(self.phones)):
-        #     a=self.phones[i] # print(self.phones[i])
-        #     b=int(old_phone) # print(old_phone)
-        #     if a==b: #self.phones[i] == old_phone:
-        #         print('ok')
-        #         self.phones[i] = new_phone
-        #         print(self.phones)
-            
-        
-        # for p in self.phones:
-        #     if p == int(old_phone):
-                
-        #             i = new_phone
-                
-            # if old_phone in self.phones:
-            #     for i in range(len(self.phones)):
-            #         if i == old_phone:
-            #             i = new_phone
-            # if old_phone == self.phones:
-            #     self.phones = new_phone
-        
+        for i in range(len(self.phones)):
+            if self.phones[i].value == old_phone:
+                self.phones[i] = Phone(new_phone)
+                return
+            raise ValueError('Phone not found')
+
+   
     def find_phone(self, phone_number):
         for phone in self.phones:
             if phone.value == phone_number:  
-                return phone_number
+                return Phone(phone_number)
 
     def __str__(self):
         phones_str = '; '.join(str(phone) for phone in self.phones)
@@ -121,11 +97,12 @@ print(john)
 #     print(record)
 
 # Знаходження та редагування телефону для John
-john = book.find("John")
-john.edit_phone("1234567890", "1112223333")
+# john = book.find("John")
+# john.edit_phone("1234567891", "1112223333")
+# # john.edit_phone("1234567891", "1112223333")
 
-john = book.find("John")
-print(john)
+# john = book.find("John")
+# print(john)
 
 # print(john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
 

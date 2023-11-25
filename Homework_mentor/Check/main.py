@@ -28,25 +28,20 @@ class Record:
            
     def remove_phone(self, phone_number):              
         self.phones = [phone for phone in self.phones if phone.value != phone_number]
-       
-    # def edit_phone(self, old_phone, new_phone):    # варіант чат-бота
-    #     self.remove_phone(old_phone)
-    #     self.add_phone(new_phone)
+    
     
     def edit_phone(self, old_phone, new_phone):
-        # for key, value in self.phones.items():
-            if old_phone in self.phones:
-                for i in range(len(self.phones)):
-                    if i == old_phone:
-                        i = new_phone
-            if self.phones == old_phone:
-                self.phones = new_phone
-        
-    
+        for i in range(len(self.phones)):
+            if self.phones[i].value == old_phone:
+                self.phones[i] = Phone(new_phone)
+                return
+            raise ValueError('Phone not found')
+
+   
     def find_phone(self, phone_number):
         for phone in self.phones:
             if phone.value == phone_number:  
-                return phone_number
+                return Phone(phone_number)
 
     def __str__(self):
         phones_str = '; '.join(str(phone) for phone in self.phones)
